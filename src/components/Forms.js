@@ -2,30 +2,26 @@ import React, {useState} from 'react'
 import db from "../others/Firebase"
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {ref, set, push} from "firebase/database"
+import {ref, set} from "firebase/database"
 toast.configure()
 
  const Forms = () => {
+
+    var userId = "123456"
    
     const [taskName,setTaskName] = useState("");
 
     const createTodo = (e) => {
         e.preventDefault();
-/*
-        setDoc(doc(db, "cities", "LA"), {
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA"
-          });
-*/
-        const todoRef = db.ref("Users/chan/Todo");  
+
+        const todoRef = "Users/"+userId+"/Todo"
         const todo ={
             taskName,
             dateCreated: new Date(),
             completed: false
         }
 
-        set(ref(db, 'users/' + "test"), todo);
+        set(ref(db, todoRef), todo);
        
 /*
         const todoRef = db.ref("Users/chan/Todo");
