@@ -1,7 +1,8 @@
-
-import './App.css';
-import Forms from './components/Forms'
 import React from 'react'
+import './App.css';
+import Forms from './components/Todo/Forms'
+import TodoList from './components/Todo/TodoList'
+
 
 
 
@@ -13,7 +14,7 @@ function App() {
                     <Forms/>
                 
                 </div>
-
+               
             </h1>
         </div>
 
