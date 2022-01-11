@@ -9,19 +9,24 @@ toast.configure()
 
     var userId = "123456"
    
-    const [taskName,setTaskName] = useState("");
+    const [task_name,setTaskName] = useState("");
 
     const createTodo = (e) => {
         e.preventDefault();
 
-        const todoRef = "Users/"+userId+"/Todo"
+        const todoRef = "users/"+userId+"/Todo"
         const todo ={
-            taskName,
-            dateCreated: new Date(),
+            task_name,
+            date_created: Date.now(),
             completed: false
         }
 
-        set(ref(db, todoRef), todo);
+        set(ref(db, todoRef), todo).then(() => {
+            toast("Saved");
+          })
+          .catch((error) => {
+            toast(error);
+          });;
        
 /*
         const todoRef = db.ref("Users/chan/Todo");
@@ -32,7 +37,7 @@ toast.configure()
         }
         todoRef.push(todo);
     */
-        toast("ok");
+       
  
 
     };
@@ -46,7 +51,7 @@ toast.configure()
            type="text"
            placeholder="Enter task name..."
            className="task-input"
-           value={taskName}
+           value={task_name}
            required
            onChange={handleChange}>
            </input>
