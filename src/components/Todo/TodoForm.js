@@ -22,30 +22,41 @@ const TodoForm = () => {
 
     const dbRef = ref(db, "users/" + userId + "/todo/");
     const newTaskRef = push(dbRef);
-    set(newTaskRef, todo).then(() => {
-      toast("Saved");
-      setTaskName("");
-    })
-    .catch((error) => {
-      toast(error);
-    });;
+    set(newTaskRef, todo)
+      .then(() => {
+        toast("Saved");
+        setTaskName("");
+      })
+      .catch((error) => {
+        toast(error);
+      });
 
-  
-   // set(ref(db, dbRef + "/"), todo)
-      
+    // set(ref(db, dbRef + "/"), todo)
   };
-
   /*
   const test = (e) => {
     e.preventDefault();
-    const dbRef = ref(db, "users/" + userId + "/Todo");
+    const dbRef = ref(db, "users/" + userId + "/todo/");
+    console.log("test");
 
     onValue(dbRef, (snapshot) => {
-      toast(snapshot.val().task_name);
+      let newUserState = [];
+      snapshot.forEach((data) => {
+        const dataVal = data.val();
+        newUserState.push({
+          id: data.key,
+          name: dataVal.name,
+          account: dataVal.account,
+        });
+        console.log(dataVal.task_name);
+      });
     });
-  };
-  */
 
+    // onValue(dbRef, (snapshot) => {
+    ///    toast(snapshot.val().task_name);
+    //  });
+  };
+*/
   const handleChange = (e) => {
     setTaskName(e.target.value);
   };

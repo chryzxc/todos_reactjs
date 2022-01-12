@@ -7,13 +7,27 @@ import { toast } from "react-toastify";
 export default function TodoList() {
   var userId = "123456";
 
-  const dbRef = ref(db, "users/" + userId );
- 
-  onValue(dbRef, (snapshot) => {
-    toast(snapshot.val());
+  const dbRef = ref(db, "users/" + userId + "/todo/");
+  const [todoList, setTodoList] = useState();
+  useState();
+  useEffect(() => {
+    onValue(dbRef, (snapshot) => {
+      const todoList = [];
+      snapshot.forEach((data) => {
+        const dataVal = data.val();
+
+        todoList.push({
+          id: data.key,
+          completed: dataVal.completed,
+          date_created: dataVal.date_created,
+          task_name: dataVal.task_name,
+        });
+      });
+      //  setTodoList(todoList);
+      console.log(todoList);
+    });
   });
-  
- 
+
   /*
   const [todoList, setTodoList] = useState();
   useEffect(() => {
@@ -25,7 +39,7 @@ export default function TodoList() {
         const todoList = [];
         for (let id in todos) {
           toast(todos[id]);
-          todoList.push({
+      //    todoList.push({
             id,
             ...todos[id],
           });
@@ -37,11 +51,10 @@ export default function TodoList() {
       }
     );
   }, []);
-  
+    */
   return (
     <div>
       {todoList ? todoList.map((todo) => <h1>{todo.task_name}</h1>) : ""}
     </div>
   );
-  */
 }
