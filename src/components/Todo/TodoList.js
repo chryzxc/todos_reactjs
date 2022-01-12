@@ -5,38 +5,43 @@ import db from "../../others/Firebase";
 import { toast } from "react-toastify";
 
 export default function TodoList() {
-    /*
-        const [todoList, setTodoList] = useState();
-        useEffect(() => {
-          const todoRef = firebase.database().ref("todo");
-          todoRef.on("value", (snapshot) => {
-            const todos = snapshot.value;
-            const todoList = [];
-            for (let id in todos) {
-              todoList.push({
-                id,
-                ...todos[id],
-              });
-            }
-            setTodoList(todoList);
-          });
-        });
-        */
+  var userId = "123456";
 
-    //test
-    const dbRef = ref(db, "/a/b/c");
-
+  const dbRef = ref(db, "users/" + userId );
+ 
+  onValue(dbRef, (snapshot) => {
+    toast(snapshot.val());
+  });
+  
+ 
+  /*
+  const [todoList, setTodoList] = useState();
+  useEffect(() => {
     onValue(
-        dbRef,
-        (snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                const childKey = childSnapshot.key;
-                const childData = childSnapshot.val();
-                toast(childKey);
-                // ...
-            });
-        }, {
-            onlyOnce: true,
+      dbRef,
+      (snapshot) => {
+        toast(snapshot.value);
+        const todos = snapshot.value;
+        const todoList = [];
+        for (let id in todos) {
+          toast(todos[id]);
+          todoList.push({
+            id,
+            ...todos[id],
+          });
         }
+        setTodoList(todoList);
+      },
+      {
+        onlyOnce: true,
+      }
     );
+  }, []);
+  
+  return (
+    <div>
+      {todoList ? todoList.map((todo) => <h1>{todo.task_name}</h1>) : ""}
+    </div>
+  );
+  */
 }
