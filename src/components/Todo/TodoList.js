@@ -1,23 +1,21 @@
-import React, { useState, useEffect , setState} from "react";
+import React, { useState, useEffect, setState } from "react";
 
 import { ref, onValue } from "firebase/database";
 import db from "../../others/Firebase";
 import { toast } from "react-toastify";
-import { TodoRow } from "./TodoRow";
 
 export default function TodoList() {
   var userId = "123456";
 
   const dbRef = ref(db, "users/" + userId + "/todo/");
   const [todoList, setTodoList] = useState();
-  useState();
+
   useEffect(() => {
     onValue(dbRef, (snapshot) => {
       const todoList = [];
       snapshot.forEach((data) => {
         const dataVal = data.val();
 
-       
         todoList.push({
           id: data.key,
           completed: dataVal.completed,
@@ -54,9 +52,7 @@ export default function TodoList() {
     );
   }, []);
     */
-  return (
-    <div>
-     <TodoRow></TodoRow>
-    </div>
-  );
-}
+  return ( {
+   
+  });
+};
