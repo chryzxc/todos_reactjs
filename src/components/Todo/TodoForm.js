@@ -9,13 +9,13 @@ toast.configure();
 const TodoForm = () => {
   var userId = "123456";
 
-  const [task_name, setTaskName] = useState("");
+  const [taskName, setTaskName] = useState("");
 
   const createTodo = (e) => {
     e.preventDefault();
 
     const todo = {
-      task_name,
+      task_name: taskName,
       date_created: Date.now(),
       completed: false,
     };
@@ -67,7 +67,7 @@ const TodoForm = () => {
         type="text"
         placeholder="Enter task name..."
         className="task-input"
-        value={task_name}
+        value={taskName}
         required
         onChange={handleChange}
       ></input>
