@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import db from "../../others/Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ref, set, onValue, push } from "firebase/database";
+import { ref, set, push } from "firebase/database";
 
 toast.configure();
 
@@ -57,25 +57,29 @@ const TodoForm = () => {
     //  });
   };
 */
+
   const handleChange = (e) => {
     setTaskName(e.target.value);
   };
 
   return (
-    <form onSubmit={createTodo}>
-      <input
-        type="text"
-        placeholder="Enter task name..."
-        className="task-input"
-        value={taskName}
-        required
-        onChange={handleChange}
-      ></input>
-      <button className="button-add-todo" type="submit">
-        Add
-      </button>
-      
-    </form>
+    <div>
+      <form onSubmit={createTodo}>
+        <input
+          type="text"
+          placeholder="Enter task name..."
+          className="task-input"
+          value={taskName}
+          required
+          onChange={handleChange}
+        ></input>
+        <button className="button-add-todo" type="submit">
+          Add
+        </button>
+      </form>
+
+     
+    </div>
   );
 };
 export default TodoForm;
