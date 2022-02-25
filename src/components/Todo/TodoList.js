@@ -1,16 +1,47 @@
 import React, { useState, useEffect } from "react";
 
-import { ref, onValue } from "firebase/database";
+import { ref, onValue,remove,update } from "firebase/database";
 import db from "../../others/Firebase";
+import { TodoRow } from "./TodoRow";
+import { toast } from "react-toastify";
 
 
 export default function TodoList() {
-  var userId = "123456";
+  var userId = "1";
 
   const dbRef = ref(db, "users/" + userId + "/todo/");
-  const [todoList, setTodoList] = useState("");
+  const [todoList, setTodoList] = useState();
 
-  useEffect(() => {
+ 
+
+
+  const deleteTodo = (todoId,todoName) => {
+  
+    remove(ref(db, "users/" + userId + "/todo/" + todoId))
+    .then(() => {
+      toast(todoName + "deleted")
+    })
+    .catch((error) => {
+      toast(error)
+    });
+  }
+
+
+  const completeTodo = (todoId,todoName) => {
+    update(ref(db, "users/" + userId + "/todo/" + todoId), {
+      completed: true,
+    })
+    .then(() => {
+      toast(todoName + " completed")
+    })
+    .catch((error) => {
+      toast(error)
+    });
+    
+  }
+
+ 
+   useEffect(() => {
     onValue(dbRef, (snapshot) => {
       const todoList = [];
       snapshot.forEach((data) => {
@@ -29,17 +60,10 @@ export default function TodoList() {
       console.log(todoList);
     });
   }, []);
-
-  
   
   return (
     <div>
-     {todoList && todoList.map((todos) => 
-     <div>
-     <h2>{todos.task_name}</h2>
-     <p>Date created: {todos.date_created}</p>
-     </div>
-     )}
+     {todoList? todoList.map((todos) => <TodoRow todos = {todos} deleteTodo={deleteTodo} completeTodo={completeTodo} ></TodoRow>) :  <h2>Loading</h2>}
       
     </div>
   );
