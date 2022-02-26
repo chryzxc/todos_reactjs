@@ -1,34 +1,16 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import ImageButton from "react-image-button";
-import { Col, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
-import Container from "react-bootstrap/Container";
-
+import { format } from 'date-fns'
 
 export const TodoRow = ({ todos, deleteTodo, completeTodo }) => {
   return (
-    <div style={{
-      display: 'flex'
-    }}>
-      <div style={{
-      
-          flex: "50%"
-        
-      }}>
-        <h1>test</h1>
-      </div>
-      <div style={{
-      
-      flex: "50%"
-    
-  }}>
-        <h1>test</h1>
+    <div key={todos.id} style={{ display: "flex", justifyContent: "center"}}>
+      <div>
+        <p>{todos.task_name}</p>
+        <label>{format(new Date(todos.date_created), 'MMM dd yyyy hh:m a').toString()}</label>
       </div>
 
-      <p>{todos.task_name}</p>
       {todos.completed ? <p>Done</p> : <p>Not done</p>}
-      <p>{new Date(todos.date_created).toString()}</p>
+
       <button onClick={() => deleteTodo(todos.id, todos.task_name)}>
         Delete
       </button>

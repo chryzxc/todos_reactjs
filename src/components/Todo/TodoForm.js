@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import db from "../../others/Firebase";
+import db from "../../others/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref, set, push } from "firebase/database";
@@ -8,55 +8,43 @@ toast.configure();
 
 const TodoForm = () => {
   var userId = "1";
+  const path = "users/" + userId + "/todo/";
 
   const [taskName, setTaskName] = useState("");
+  const [isTodoAdded, setIsTodoAdded] = useState(false);
+  
+  console.log('initial' + isTodoAdded);
 
   const createTodo = (e) => {
     e.preventDefault();
-
+   
+    console.log('create' + isTodoAdded);
     const todo = {
       task_name: taskName,
       date_created: Date.now(),
       completed: false,
     };
 
-    const dbRef = ref(db, "users/" + userId + "/todo/");
+    const dbRef = ref(db, path);
     const newTaskRef = push(dbRef);
+
+
     set(newTaskRef, todo)
       .then(() => {
-        toast("Saved");
-        setTaskName("");
+        setIsTodoAdded(true);
+        console.log('added' + isTodoAdded);
+        toast(taskName + " added");
+       // setTaskName("");
+       
       })
       .catch((error) => {
         toast(error);
+        setIsTodoAdded(false);
       });
 
-    // set(ref(db, dbRef + "/"), todo)
+  
   };
-  /*
-  const test = (e) => {
-    e.preventDefault();
-    const dbRef = ref(db, "users/" + userId + "/todo/");
-    console.log("test");
 
-    onValue(dbRef, (snapshot) => {
-      let newUserState = [];
-      snapshot.forEach((data) => {
-        const dataVal = data.val();
-        newUserState.push({
-          id: data.key,
-          name: dataVal.name,
-          account: dataVal.account,
-        });
-        console.log(dataVal.task_name);
-      });
-    });
-
-    // onValue(dbRef, (snapshot) => {
-    ///    toast(snapshot.val().task_name);
-    //  });
-  };
-*/
 
   const handleChange = (e) => {
     setTaskName(e.target.value);
@@ -73,9 +61,10 @@ const TodoForm = () => {
           required
           onChange={handleChange}
         ></input>
-        <button className="button-add-todo" type="submit">
-          Add
-        </button>
+        {isTodoAdded ? <button className="button-add-todo" type="submit"> Please wait... </button>: <button className="button-add-todo" type="submit"> Add </button>}
+         
+       
+   
       </form>
 
      

@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { ref, onValue,remove,update } from "firebase/database";
-import db from "../../others/Firebase";
+import { ref,remove,update } from "firebase/database";
+import db from "../../others/firebase";
 import { TodoRow } from "./TodoRow";
 import { toast } from "react-toastify";
+import  useFetchData  from "../../others/useFetchData";
 
 
 export default function TodoList() {
   var userId = "1";
+  const path = "users/" + userId + "/todo/";
+  const dbRef = ref(db,path);
+  
+  const {fetchData: todoList , isStillFetching} = useFetchData(dbRef);
 
-  const dbRef = ref(db, "users/" + userId + "/todo/");
-  const [todoList, setTodoList] = useState();
-
- 
 
 
   const deleteTodo = (todoId,todoName) => {
   
-    remove(ref(db, "users/" + userId + "/todo/" + todoId))
+    remove(ref(db, path + todoId))
     .then(() => {
-      toast(todoName + "deleted")
+      toast(todoName + " deleted")
     })
     .catch((error) => {
       toast(error)
@@ -28,7 +29,7 @@ export default function TodoList() {
 
 
   const completeTodo = (todoId,todoName) => {
-    update(ref(db, "users/" + userId + "/todo/" + todoId), {
+    update(ref(db,path + todoId), {
       completed: true,
     })
     .then(() => {
@@ -40,30 +41,11 @@ export default function TodoList() {
     
   }
 
- 
-   useEffect(() => {
-    onValue(dbRef, (snapshot) => {
-      const todoList = [];
-      snapshot.forEach((data) => {
-        const dataVal = data.val();
-
-        todoList.push({
-          id: data.key,
-          completed: dataVal.completed,
-          date_created: dataVal.date_created,
-          task_name: dataVal.task_name,
-        });
-      });
-     
-      setTodoList(todoList);
-    //  todoList.map((todos) => console.log(todos.completed));
-      console.log(todoList);
-    });
-  }, []);
-  
   return (
     <div>
-     {todoList? todoList.map((todos) => <TodoRow todos = {todos} deleteTodo={deleteTodo} completeTodo={completeTodo} ></TodoRow>) :  <h2>Loading</h2>}
+
+      {isStillFetching ? <p>Loading</p> : ""}
+      {todoList && todoList.map((todos) => <TodoRow todos = {todos} deleteTodo={deleteTodo} completeTodo={completeTodo} ></TodoRow>) }
       
     </div>
   );
