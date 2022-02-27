@@ -11,14 +11,11 @@ const TodoForm = () => {
   const path = "users/" + userId + "/todo/";
 
   const [taskName, setTaskName] = useState("");
-  const [isTodoAdded, setIsTodoAdded] = useState(false);
-  
-  console.log('initial' + isTodoAdded);
 
   const createTodo = (e) => {
     e.preventDefault();
    
-    console.log('create' + isTodoAdded);
+   
     const todo = {
       task_name: taskName,
       date_created: Date.now(),
@@ -31,15 +28,15 @@ const TodoForm = () => {
 
     set(newTaskRef, todo)
       .then(() => {
-        setIsTodoAdded(true);
-        console.log('added' + isTodoAdded);
+    
+       
         toast(taskName + " added");
        // setTaskName("");
        
       })
       .catch((error) => {
         toast(error);
-        setIsTodoAdded(false);
+     
       });
 
   
@@ -61,7 +58,8 @@ const TodoForm = () => {
           required
           onChange={handleChange}
         ></input>
-        {isTodoAdded ? <button className="button-add-todo" type="submit"> Please wait... </button>: <button className="button-add-todo" type="submit"> Add </button>}
+        <button className="button-add-todo" type="submit"> Add </button>
+
          
        
    

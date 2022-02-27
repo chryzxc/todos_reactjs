@@ -1,19 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import "./index.css";
 import TodoForm from "./components/Todo/TodoForm";
 import TodoList from "./components/Todo/TodoList";
+import waves from "./assets/wave.svg";
 
 function App() {
   return (
     <div className="App">
-      <h1>My TodoList</h1>
+      <img src={waves} />
+
       <div>
-        <TodoForm/>
+        <h1>My TodoList</h1>
+        <div>
+          <TodoForm />
+        </div>
       </div>
-      <div>
-        <TodoList/>
+
+      <div style={{
+        marginBottom: 100,
+      }}>
+        <TodoList />
       </div>
-      
     </div>
   );
 }

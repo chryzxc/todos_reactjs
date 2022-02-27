@@ -41,11 +41,24 @@ export default function TodoList() {
     
   }
 
+  const unfinishedTodo = (todoId,todoName) => {
+    update(ref(db,path + todoId), {
+      completed: false,
+    })
+    .then(() => {
+      toast('undo '+todoName)
+    })
+    .catch((error) => {
+      toast(error)
+    });
+    
+  }
+
   return (
     <div>
 
       {isStillFetching ? <p>Loading</p> : ""}
-      {todoList && todoList.map((todos) => <TodoRow todos = {todos} deleteTodo={deleteTodo} completeTodo={completeTodo} ></TodoRow>) }
+      {todoList && todoList.map((todos) => <TodoRow todos = {todos} deleteTodo={deleteTodo} completeTodo={completeTodo} unfinishedTodo={unfinishedTodo}></TodoRow>) }
       
     </div>
   );

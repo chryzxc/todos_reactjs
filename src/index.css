@@ -14,6 +14,8 @@ code {
 
 .App {
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .App-logo {
@@ -26,6 +28,45 @@ code {
   
 }
 
+.Nav{
+  height: 100;
+  width: 1400;
+  
+}
+
+.raisedbox { 
+  padding: 10px;
+  border: 1px solid #77aaff;
+  box-shadow:  -1px 1px #77aaff,
+       -2px 2px #77aaff,
+       -3px 3px #77aaff,
+       -4px 4px #77aaff,
+       -5px 5px #77aaff;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  width: 50%;
+  padding: 20px;
+ 
+}
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+
+img {
+  border-radius: 5px 5px 0 0;
+}
 
 
 

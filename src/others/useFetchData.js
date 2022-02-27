@@ -3,8 +3,7 @@ import { onValue } from "firebase/database";
 
 const useFetchData = (dbRef) => {
   const [fetchData, setFetchData] = useState(null);
-  const [isStillFetching, setIsStillFetching] = useState(true);
-
+ 
   useEffect(() => {
     onValue(dbRef, (snapshot) => {
       const fetchData = [];
@@ -19,12 +18,12 @@ const useFetchData = (dbRef) => {
         });
       });
 
-      setIsStillFetching(false);
+    
       setFetchData(fetchData);
     });
   }, []);
  
-  return { fetchData, isStillFetching };
+  return { fetchData };
 };
 
 export default useFetchData;
