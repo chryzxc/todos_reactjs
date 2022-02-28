@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import "./index.css";
-import TodoForm from "./components/Todo/TodoForm";
-import TodoList from "./components/Todo/TodoList";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 import waves from "./assets/wave.svg";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  text-align: center;
+  color: #0099ff;
+`;
 
 function App() {
   return (
@@ -10,15 +16,17 @@ function App() {
       <img src={waves} />
 
       <div>
-        <h1>My TodoList</h1>
+        <Title>My TodoList</Title>
         <div>
           <TodoForm />
         </div>
       </div>
 
-      <div style={{
-        marginBottom: 100,
-      }}>
+      <div
+        style={{
+          marginBottom: 100,
+        }}
+      >
         <TodoList />
       </div>
     </div>

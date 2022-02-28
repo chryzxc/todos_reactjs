@@ -1,11 +1,11 @@
 import React from "react";
 
 import { ref,remove,update } from "firebase/database";
-import db from "../../others/firebase";
+import db from "../others/firebase.js";
 import { TodoRow } from "./TodoRow";
 
 import { toast } from "react-toastify";
-import  useFetchData  from "../../others/useFetchData";
+import  useFetchData  from "../others/useFetchData";
 
 
 export default function TodoList() {
