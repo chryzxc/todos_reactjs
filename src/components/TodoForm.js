@@ -20,6 +20,7 @@ const InputAdd = styled.input`
   border: 2px solid #0099ff;
   margin: 10px;
   border-radius: 4px;
+  padding: 3px
 `;
 
 const TodoForm = () => {

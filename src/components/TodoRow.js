@@ -14,6 +14,10 @@ const TaskUnfinished = styled.h3`
   color: #0099ff;
 `;
 
+const Divider = styled.hr`
+border-top: 1px solid #bbb;
+`;
+
 const Button = styled.button`
   background: transparent;
   border-radius: 3px;
@@ -25,18 +29,16 @@ const Button = styled.button`
 
 const Container = styled("div")({
   width: "100%",
-  height: 50,
-  "min-height": "100vh",
-  overflow: "auto",
+  height: 'auto',
   display: "flex",
   "flex-direction": "column",
-  "align-items": "flex-start",
-  "justify-content": "flex-start",
+  "align-items": "center",
+  "justify-content": "center",
 });
 
 const Container1 = styled("div")({
   display: "flex",
-  width: "100%",
+  width: "90vh",
   "align-items": "flex-start",
   flex: "0 0 auto",
   position: "relative",
@@ -47,8 +49,9 @@ const Container1 = styled("div")({
 });
 
 const Checkbox = styled("input")({
-  "align-self": "center",
+  "align-self": "top",
   "margin-left": "20px",
+  "margin-top": "25px",
 });
 
 const Container2 = styled("div")({
@@ -88,7 +91,8 @@ const Container5 = styled("div")({
   top: "1px",
   position: "absolute",
   right: "0px",
-  "justify-content": "center",
+  "justify-content": "top",
+  
 });
 
 export const TodoRow = ({
@@ -99,6 +103,7 @@ export const TodoRow = ({
 }) => {
   return (
     <Container>
+      <Divider></Divider>
       <Container1>
         {todos.completed ? (
           <Checkbox type="checkbox" checked="true" />
@@ -141,7 +146,9 @@ export const TodoRow = ({
               Mark as complete
             </Button>
           )}
+          
         </Container5>
+        
       </Container1>
     </Container>
   );
