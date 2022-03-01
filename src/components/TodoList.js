@@ -5,7 +5,7 @@ import db from "../others/firebase.js";
 import { TodoRow } from "./TodoRow";
 
 import { toast } from "react-toastify";
-import  useFetchData  from "../others/useFetchData";
+import  useFetchData  from "../hooks/useFetchData";
 
 
 export default function TodoList() {

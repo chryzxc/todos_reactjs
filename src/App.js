@@ -13,7 +13,10 @@ const Title = styled.h1`
 function App() {
   return (
     <div className="App">
-      <img src={waves} />
+      <img src={waves} style={{
+        height: '20vh',
+        width: '100%'
+      }} />
 
       <div>
         <Title>My TodoList</Title>
